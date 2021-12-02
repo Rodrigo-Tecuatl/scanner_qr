@@ -33,7 +33,7 @@ export default function Scanner({ navigation }) {
       <StatusBar style="auto" />
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        // type={type} hola mundo
+        // type={type} hola mundo jdkfjdkfdf
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={StyleSheet.absoluteFillObject} 
       />
