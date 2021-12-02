@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { View, Text, SafeAreaView, StyleSheet, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import BarcodeMask from 'react-native-barcode-mask';
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
+  // const [type, setType] = useState(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
@@ -16,14 +18,14 @@ export default function Scanner({ navigation }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`¡Se escaneó el código de barras con el tipo ${type} y los datos ${data}!`);
+    alert(`Se escaneó el código de barras con el tipo ${type} y los datos ${data}`);
   };
 
   if (hasPermission === null) {
-    return <Text>Solicitando permiso de cámara</Text>;
+    return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>Solicitando permiso de cámara</Text>;
   }
   if (hasPermission === false) {
-    return <Text>Sin acceso a la cámara</Text>;
+    return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>Sin acceso a la cámara</Text>;
   }
 
   return (
@@ -31,9 +33,13 @@ export default function Scanner({ navigation }) {
       <StatusBar style="auto" />
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
+        // type={type}
+        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+        style={StyleSheet.absoluteFillObject} 
       />
+      <BarcodeMask width={250} height={250} edgeColor="#62B1F6" showAnimatedLine={false} edgeRadius={15} edgeHeight={40} edgeWidth={40} backgroundColor="rgba(0, 0, 0, 0.3)" />
       {scanned && <Button title={'Toque para escanear de nuevo'} onPress={() => setScanned(false)} />}
+      {/* </BarCodeScanner> */}
     </SafeAreaView>
   );
 }
@@ -45,4 +51,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scannerInfo: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

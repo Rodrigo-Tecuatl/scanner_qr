@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, Button } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Button, View } from 'react-native';
 import Navigation from './navigation/Navigation';
 
 export default function App() {
