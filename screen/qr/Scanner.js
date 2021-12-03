@@ -7,13 +7,15 @@ import BarcodeMask from 'react-native-barcode-mask';
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [activeCamera, setActiveCamera] = useState(false);
 
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
+      
     })();
-  }, []);
+  }, [activeCamera]);
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
@@ -27,6 +29,8 @@ export default function Scanner({ navigation }) {
     return <Text>Sin acceso a la cámara</Text>;
   }
 
+  console.log(scanned);
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -38,7 +42,6 @@ export default function Scanner({ navigation }) {
       />
       <BarcodeMask width={250} height={250} edgeColor="#62B1F6" showAnimatedLine={false} edgeRadius={15} edgeHeight={40} edgeWidth={40} backgroundColor="rgba(0, 0, 0, 0.3)" />
       {scanned && <Button title={'Toque para escanear de nuevo'} onPress={() => setScanned(false)} />}
-      {/* </BarCodeScanner> */}
     </SafeAreaView>
   );
 }

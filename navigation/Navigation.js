@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Scanner from '../screen/qr/Scanner';
 import Networkin from '../screen/qr/Networkin';
+import Checkin from '../screen/qr/Checkin';
 
 export default function Navigation() {
 	return (
@@ -30,7 +31,8 @@ const TopTab = createMaterialTopTabNavigator();
 function NavigationTopTabs() {
   return(
     <TopTab.Navigator 
-      initialRourteName="topNetworkin">
+      initialRourteName="topCheckin">
+      <TopTab.Screen name="topCheckin" component={ Checkin } />
       <TopTab.Screen name="topNetworkin" component={ Networkin } />
       <TopTab.Screen name="topScanner" component={ Scanner } />
     </TopTab.Navigator>
