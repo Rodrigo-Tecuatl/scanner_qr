@@ -22,10 +22,10 @@ export default function Scanner({ navigation }) {
   };
 
   if (hasPermission === null) {
-    return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>Solicitando permiso de cámara</Text>;
+    return <Text>Solicitando permiso de cámara</Text>;
   }
   if (hasPermission === false) {
-    return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>Sin acceso a la cámara</Text>;
+    return <Text>Sin acceso a la cámara</Text>;
   }
 
   return (
@@ -33,7 +33,7 @@ export default function Scanner({ navigation }) {
       <StatusBar style="auto" />
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        // type={type} hola mundo jdkfjdkfdf
+        type={BarCodeScanner.Constants.Type.back}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={StyleSheet.absoluteFillObject} 
       />

@@ -29,7 +29,8 @@ const TopTab = createMaterialTopTabNavigator();
 
 function NavigationTopTabs() {
   return(
-    <TopTab.Navigator>
+    <TopTab.Navigator 
+      initialRourteName="topNetworkin">
       <TopTab.Screen name="topNetworkin" component={ Networkin } />
       <TopTab.Screen name="topScanner" component={ Scanner } />
     </TopTab.Navigator>
