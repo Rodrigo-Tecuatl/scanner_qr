@@ -6,7 +6,6 @@ import BarcodeMask from 'react-native-barcode-mask';
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  // const [type, setType] = useState(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
