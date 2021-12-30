@@ -35,8 +35,10 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION",
-        "android.permission.RECORD_AUDIO"
-      ]
+        "android.permission.RECORD_AUDIO",
+        "android.permission.WRITE_SETTINGS"
+      ],
+      "package": "com.rodrigotc.scanner_qr_v2"
     },
     "web": {
       "favicon": "./assets/favicon.png"
