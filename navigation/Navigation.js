@@ -15,6 +15,19 @@ export default function Navigation() {
 	);
 }
 
+function useResetScreenOnBlur() {
+	useFocusEffect(
+	  React.useCallback(() => {
+		return () => navigation.setParams({ screen: undefined, params: undefined });
+	  }, [navigation])
+	);
+  };
+  
+  // Then use it
+  function Tab2() {
+	useResetScreenOnBlur();
+  }
+
 const Stack = createNativeStackNavigator();
 
 function NavigationStack() {

@@ -1,13 +1,16 @@
+import { useIsFocused } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, SafeAreaView, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import BarcodeMask from 'react-native-barcode-mask';
+import { BlurView } from 'expo-blur';
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [activeCamera, setActiveCamera] = useState(false);
+  const isFocused = useIsFocused();
+  // const [activeCamera, setActiveCamera] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -15,7 +18,7 @@ export default function Scanner({ navigation }) {
       setHasPermission(status === 'granted');
       
     })();
-  }, [activeCamera]);
+  }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
@@ -34,12 +37,15 @@ export default function Scanner({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+      { isFocused && (
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         type={BarCodeScanner.Constants.Type.back}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={StyleSheet.absoluteFillObject} 
       />
+      )
+      }
       <BarcodeMask width={250} height={250} edgeColor="#62B1F6" showAnimatedLine={false} edgeRadius={15} edgeHeight={40} edgeWidth={40} backgroundColor="rgba(0, 0, 0, 0.3)" />
       {scanned && <Button title={'Toque para escanear de nuevo'} onPress={() => setScanned(false)} />}
     </SafeAreaView>
